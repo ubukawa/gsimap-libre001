@@ -2,7 +2,7 @@
 Consumption test of GSI Map Vector with MapLibre
 
 # Test maps
-(coming soon)
+- https://ubukawa.github.io/gsimap-libre001/map001.html
 
 # Resource
 ## Repository
