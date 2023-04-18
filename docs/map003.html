@@ -190,7 +190,7 @@ map.on('load', function(){
     data: './data/test.geojson'
   });
   map.addLayer({
-    'filter':['==',['get','typecode'],1,true,false],
+    'filter':['==',['get','typecode'],1],
     'maxzoom':12,
     'id':'geojson_area_A',
     'type':'line',
@@ -201,7 +201,7 @@ map.on('load', function(){
     }
   })
   map.addLayer({
-    'filter':['==',['get','typecode'],2,true,false],
+    'filter':['==',['get','typecode'],2],
     'maxzoom':12,
     'id':'geojson_area_B',
     'type':'line',
