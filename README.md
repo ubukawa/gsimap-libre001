@@ -10,7 +10,8 @@ Consumption test of GSI Map Vector with MapLibre
   - https://ubukawa.github.io/gsimap-libre001/map003.html
 - Tried to add voice reading to the map (not succeeded yet)
   - https://ubukawa.github.io/gsimap-libre001/map004.html
-
+- Tried to add land registration map in Nemuro
+  - https://ubukawa.github.io/gsimap-libre001/map005.html
 # Resource
 ## Repository
 https://github.com/gsi-cyberjapan/optimal_bvmap
