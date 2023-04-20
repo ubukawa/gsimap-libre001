@@ -70,7 +70,9 @@ map.on('load', function(){
         '#00FF00',
         ['乙二','乙三'],
         '#00FFFF',
-        '#555555'
+        null,
+        '#555555',
+        '#FF00FF'
       ],
       'line-width': 0.7
     }
@@ -101,7 +103,7 @@ map.on('load', function(){
   const legend_target = {
     'geojson_area_A': '注視地区（ダミー）',
     'geojson_area_B': '特別注視地区（ダミー）',
-    'nemuro': '登記所備付地図データ 根室市'
+    'nemuro': '登記所備付地図データ 根室市（青：甲一、甲二、緑：甲三、乙一、水色：乙二、乙三、灰：その他）'
   };
   map.addControl(new MaplibreLegendControl(legend_target, {
     showDefault: false,
