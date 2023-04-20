@@ -28,7 +28,7 @@ body { margin:0; padding:0; }
 
 <script>
 function popupFunction() {
-   alert("You can show a pop-up message")
+   alert("根室でのイメージです。注視地区・特別注視地区の区域は目視でトレースしたものであり正確ではありません。")
 }
 
 var map = new maplibregl.Map({
@@ -54,13 +54,25 @@ map.on('load', function(){
     data: './data/nemuro_toki.geojson'
   });
   map.addLayer({
+    'minzoom':10, 
     'maxzoom':21,
     'id':'nemuro',
     'type':'line',
     'source':'nemuro',
     'paint':{
-      'line-color':'#0000FF',
-      'line-width': 1
+//      'line-color':'#0000FF',
+      'line-color':[
+        'match',
+        ['get','精度区分'],
+        ['甲一','甲二'],
+        '#0000FF',
+        ['甲三','乙一'],
+        '#00FF00',
+        ['乙二','乙三'],
+        '#00FFFF',
+        '#555555'
+      ],
+      'line-width': 0.7
     }
   })
   map.addLayer({
@@ -89,7 +101,7 @@ map.on('load', function(){
   const legend_target = {
     'geojson_area_A': '注視地区（ダミー）',
     'geojson_area_B': '特別注視地区（ダミー）',
-    'nemuro': '登記所備付地図データ 根室市）'
+    'nemuro': '登記所備付地図データ 根室市'
   };
   map.addControl(new MaplibreLegendControl(legend_target, {
     showDefault: false,
@@ -117,7 +129,8 @@ map.addControl(new MaplibreExportControl({
 
 
 //debug
-map.showTileBoundaries = true;
+//map.showTileBoundaries = true;
+map.showTileBoundaries = false;
 map.showCollisionBoxes = false;
 
 </script>
