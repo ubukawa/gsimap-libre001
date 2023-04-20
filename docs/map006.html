@@ -54,34 +54,34 @@ map.on('load', function(){
     data: './data/nemuro_toki.geojson'
   });
   map.addLayer({
+    'maxzoom':21,
+    'id':'nemuro',
+    'type':'line',
+    'source':'nemuro',
+    'paint':{
+      'line-color':'#0000FF',
+      'line-width': 1
+    }
+  })
+  map.addLayer({
     'filter':['==',['get','typecode'],1],
     'maxzoom':15, //about 1:10,000 scale
-    'id':'geojson_area_A',
+    'id':'geojson_area_A', //注視地区
     'type':'line',
     'source':'area_geojson',
     'paint':{
-      'line-color':'#FF0000',
+      'line-color':'#000000',
       'line-width': 2
     }
   })
   map.addLayer({
     'filter':['==',['get','typecode'],2],
     'maxzoom':15, //about 1:10,000 scale
-    'id':'geojson_area_B',
+    'id':'geojson_area_B', //特別注視地区
     'type':'line',
     'source':'area_geojson',
     'paint':{
-      'line-color':'#0000FF',
-      'line-width': 2
-    }
-  })
-  map.addLayer({
-    'maxzoom':17,
-    'id':'nemuro',
-    'type':'line',
-    'source':'nemuro',
-    'paint':{
-      'line-color':'#0000FF',
+      'line-color':'#FF0000',
       'line-width': 2
     }
   })
