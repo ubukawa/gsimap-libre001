@@ -85,6 +85,17 @@ map.on('load', function(){
       'line-width': 2
     }
   })
+  //legend
+  const legend_target = {
+    'geojson_area_A': '注視地区（ダミー）',
+    'geojson_area_B': '特別注視地区（ダミー）',
+    'nemuro': '登記所備付地図データ 根室市）'
+  };
+  map.addControl(new MaplibreLegendControl(legend_target, {
+    showDefault: false,
+    onlyRendered: true,
+    reverseOrder: false
+  }), 'bottom-left');
 })
   
 //UI
@@ -103,12 +114,7 @@ map.addControl(new MaplibreExportControl({
   Local: 'en'
 }), 'top-right');
 
-//legend
-map.addControl(new MaplibreLegendControl({}, {
-   showDefault: false,
-   onlyRendered: true,
-   reverseOrder: false
-}), 'bottom-left');
+
 
 //debug
 map.showTileBoundaries = true;
