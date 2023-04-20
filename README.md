@@ -20,4 +20,8 @@ https://github.com/gsi-cyberjapan/optimal_bvmap
 - https://gsi-cyberjapan.github.io/optimal_bvmap/style/std.json
 
 ## References
-- https://day-journal.com/memo/maplibregljs-012/
+- GeoJSONファイルを追加する方法
+  - https://day-journal.com/memo/maplibregljs-012/
+
+- 「登記所備付地図データ 根室市」（法務省　釧路地方法務局根室支局）（2023年4月19日にダウンロード）
+  - https://www.geospatial.jp/ckan/dataset/houmusyouchizu-2022-1-32
