@@ -12,6 +12,8 @@ Consumption test of GSI Map Vector with MapLibre
   - https://ubukawa.github.io/gsimap-libre001/map004.html
 - Tried to add land registration map in Nemuro
   - https://ubukawa.github.io/gsimap-libre001/map005.html
+- No style switcher, legend limited, etc.
+  - https://ubukawa.github.io/gsimap-libre001/map006.html
 # Resource
 ## Repository
 https://github.com/gsi-cyberjapan/optimal_bvmap
