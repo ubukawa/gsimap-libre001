@@ -75,6 +75,7 @@ map.on('load', function(){
       'line-width': 0.7
     }
   })
+  /*
   map.loadGlyphs(
     'https://gsi-cyberjapan.github.io/optimal_bvmap/glyphs/{fontstack}/{range}.pbf',
     function (error, glyphs){
@@ -82,6 +83,7 @@ map.on('load', function(){
       map.addGlyphs('custom-font', glyphs)
     }
   )
+  */
   map.addLayer({
     'minzoom':16, 
     'maxzoom':21,
@@ -89,7 +91,6 @@ map.on('load', function(){
     'type':'symbol',
     'source':'nemuro',
     'layout':{
-//      'text-field':'{QGIS_ID}',
       'text-field': ['get','QGIS_ID'],
       'text-font':['NotoSerifJP-SemiBold'],
       'text-size': 10
