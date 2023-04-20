@@ -76,18 +76,18 @@ map.on('load', function(){
     }
   })
   map.addLayer({
-    'minzoom':19, 
+    'minzoom':17, 
     'maxzoom':21,
     'id':'nemuro-label',
     'type':'symbol',
     'source':'nemuro',
     'layout':{
-      'text-field':'{QGIS_ID}',
+//      'text-field':'{QGIS_ID}',
+      'text-field': 'test',
       'text-font':'NotoSerifJP-SemiBold',
       'text-size': 10
     },
     'paint':{
-//      'line-color':'#0000FF',
       'text-color':[
         'match',
         ['get','精度区分'],
