@@ -75,6 +75,13 @@ map.on('load', function(){
       'line-width': 0.7
     }
   })
+  map.loadGlyphs(
+    'https://gsi-cyberjapan.github.io/optimal_bvmap/glyphs/{fontstack}/{range}.pbf',
+    function (error, glyphs){
+      if (error) throw error;
+      map.addGlyphs('custom-font', glyphs)
+    }
+  )
   map.addLayer({
     'minzoom':16, 
     'maxzoom':21,
