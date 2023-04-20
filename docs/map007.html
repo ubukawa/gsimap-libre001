@@ -76,14 +76,14 @@ map.on('load', function(){
     }
   })
   map.addLayer({
-    'minzoom':17, 
+    'minzoom':16, 
     'maxzoom':21,
     'id':'nemuro-label',
     'type':'symbol',
     'source':'nemuro',
     'layout':{
 //      'text-field':'{QGIS_ID}',
-      'text-field': 'test',
+      'text-field': ['get','QGIS_ID'],
       'text-font':['NotoSerifJP-SemiBold'],
       'text-size': 10
     },
