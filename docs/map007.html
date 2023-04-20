@@ -83,7 +83,7 @@ map.on('load', function(){
       map.addGlyphs('custom-font', glyphs)
     }
   )
-  */
+
   map.addLayer({
     'minzoom':16, 
     'maxzoom':21,
@@ -111,6 +111,7 @@ map.on('load', function(){
       'text-halo-width':1
     }
   })
+    */
   map.addLayer({
     'filter':['==',['get','typecode'],1],
     'maxzoom':15, //about 1:10,000 scale
