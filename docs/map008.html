@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Test- 国土地理院最適化ベクトルタイル </title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://ubukawa.github.io/cmv-test/maplibre-gl@2.4.0/maplibre-gl.js'></script>
+<link href='https://ubukawa.github.io/cmv-test/maplibre-gl@2.4.0/maplibre-gl.css' rel='stylesheet' />
+<link href='https://ubukawa.github.io/cmv-test/watergis/maplibre-gl-export@1.3.8/maplibre-gl-export.css' rel='stylesheet' />
+<script src='https://ubukawa.github.io/cmv-test/watergis/maplibre-gl-export@1.3.8/maplibre-gl-export.js'></script>
+<link href='https://ubukawa.github.io/cmv-test/watergis/maplibre-gl-legend@1.2.8/maplibre-gl-legend.css' rel='stylesheet' />
+<script src='https://ubukawa.github.io/cmv-test/watergis/maplibre-gl-legend@1.2.8/maplibre-gl-legend.js'></script>
+  
+  
+<style>
+body { margin:0; padding:0; }
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+</style>
+</head>
+<body onload="popupFunction()">
+ 
+<div id='map'></div>
+
+<script>
+function popupFunction() {
+   alert("根室でのイメージです。注視地区・特別注視地区の区域は目視でトレースしたものであり正確ではありません。")
+}
+
+var map = new maplibregl.Map({
+  container: 'map', 
+  attributionControl: true,
+  hash: true, 
+  //renderWorldCopies: false,
+  style: 'https://gsi-cyberjapan.github.io/optimal_bvmap/style/std.json', // style file path
+  center: [145.58222, 43.3299], // center [lng, lat]
+  zoom: 5, // zoom level at loading
+  maxPitch: 85,
+  maxZoom: 4, // min zoom
+  maxZoom: 22 // max zoom
+});
+
+map.on('load', function(){
+  map.addSource('area_geojson',{
+    type: 'geojson',
+    data: './data/test.geojson'
+  });
+  map.addSource('nemuro',{
+    type: 'geojson',
+    data: './data/nemuro_toki.geojson'
+  });
+  map.addSource('did2015',{
+    type: 'raster',
+    tiles: ['http://maps.gsi.go.jp/xyz/did2015/{z}/{x}/{y}.png'],
+    attribution: '人口集中地区（DID） 平成27年'
+  });
+  map.addLayer({
+    'minzoom':10, 
+    'maxzoom':21,
+    'id':'nemuro',
+    'type':'line',
+    'source':'nemuro',
+    'paint':{
+//      'line-color':'#0000FF',
+      'line-color':[
+        'match',
+        ['get','精度区分'],
+        ['甲一','甲二'],
+        '#0000FF',
+        ['甲三','乙一'],
+        '#00FF00',
+        ['乙二','乙三'],
+        '#00FFFF',
+        '#FF00FF'
+      ],
+      'line-width': 0.7
+    }
+  })
+  /*
+  map.loadGlyphs(
+    'https://gsi-cyberjapan.github.io/optimal_bvmap/glyphs/{fontstack}/{range}.pbf',
+    function (error, glyphs){
+      if (error) throw error;
+      map.addGlyphs('custom-font', glyphs)
+    }
+  )
+    */
+  map.addLayer({
+    'minzoom':16, 
+    'maxzoom':21,
+    'id':'nemuro-label',
+    'type':'symbol',
+    'source':'nemuro',
+    'layout':{
+      'text-field': ['get','QGIS_ID'],
+      'text-font':['NotoSerifJP-SemiBold'],
+      'text-size': 10
+    },
+    'paint':{
+      'text-color':[
+        'match',
+        ['get','精度区分'],
+        ['甲一','甲二'],
+        '#0000FF',
+        ['甲三','乙一'],
+        '#00FF00',
+        ['乙二','乙三'],
+        '#00FFFF',
+        '#FF00FF'
+      ],
+      'text-halo-color': 'rgba(255,255,255,0.5)',
+      'text-halo-width':1
+    }
+  })
+  map.addLayer({
+    'filter':['==',['get','typecode'],1],
+    'maxzoom':15, //about 1:10,000 scale
+    'id':'geojson_area_A', //注視地区
+    'type':'line',
+    'source':'area_geojson',
+    'paint':{
+      'line-color':'#000000',
+      'line-width': 2
+    }
+  })
+  map.addLayer({
+    'filter':['==',['get','typecode'],2],
+    'maxzoom':15, //about 1:10,000 scale
+    'id':'geojson_area_B', //特別注視地区
+    'type':'line',
+    'source':'area_geojson',
+    'paint':{
+      'line-color':'#FF0000',
+      'line-width': 2
+    }
+  })
+  map.addLayer({
+    //'maxzoom':15, //about 1:10,000 scale
+    'id':'did2015', //特別注視地区
+    'type':'raster',
+    'source':'did2015',
+  })
+  //legend
+  const legend_target = {
+    'geojson_area_A': '注視地区（ダミー）',
+    'geojson_area_B': '特別注視地区（ダミー）',
+    'nemuro': '登記所備付地図データ 根室市',
+    'nemuro-label': '登記所備付地図データ 根室市（ラベル）',
+    'did2015': '登記所備付地図データ 人口集中地区（DID） 平成27年'
+  };
+  map.addControl(new MaplibreLegendControl(legend_target, {
+    showDefault: false,
+    onlyRendered: true,
+    reverseOrder: false
+  }), 'bottom-left');
+})
+  
+//UI
+//map.addControl(new maplibregl.AttributionControl({customAttribution: "GSI Map Vector." , compact: true}));
+map.addControl(new maplibregl.AttributionControl({customAttribution: "<br />登記所備付地図データについては、精度区分が異なるデータが含まれることから、線色を変えて表現しています。<br />（青：甲一、甲二、緑：甲三、乙一、水色：乙二、乙三、ピンク：その他（null等））" }));
+map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
+map.addControl(new maplibregl.ScaleControl() );
+
+//Export
+map.addControl(new MaplibreExportControl({
+  PageSize: Size.A4,
+  PageOrientation: PageOrientation.Portrait,
+  Format: Format.PNG,
+  DPI: DPI[96],
+  //Crosshair: true,
+  PrintableArea: true,
+  Local: 'en'
+}), 'top-right');
+
+
+
+//debug
+//map.showTileBoundaries = true;
+map.showTileBoundaries = false;
+map.showCollisionBoxes = false;
+
+</script>
+ 
+</body>
+</html>

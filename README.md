@@ -29,3 +29,6 @@ https://github.com/gsi-cyberjapan/optimal_bvmap
 
 - 「登記所備付地図データ 根室市」（法務省　釧路地方法務局根室支局）（2023年4月19日にダウンロード）
   - https://www.geospatial.jp/ckan/dataset/houmusyouchizu-2022-1-32
+
+- DID 人口集中地区（DID） 平成27年（総務省統計局）from 地理院地図
+  - http://maps.gsi.go.jp/xyz/did2015/{z}/{x}/{y}.png
