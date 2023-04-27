@@ -16,6 +16,9 @@ Consumption test of GSI Map Vector with MapLibre
   - https://ubukawa.github.io/gsimap-libre001/map006.html
 - No style switcher, legend limited, etc. Added labels
   - https://ubukawa.github.io/gsimap-libre001/map007.html
+- With DID(2015)
+  - https://ubukawa.github.io/gsimap-libre001/map008.html
+
 # Resource
 ## Repository
 https://github.com/gsi-cyberjapan/optimal_bvmap
